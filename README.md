@@ -32,8 +32,8 @@ module. Each module is independent and serves a clear purpose.
 
 ### Android Specific Components
 
-1. Jetpack Compose
-1. Jetpack Compose Navigation
+1. __Jetpack Compose__
+1. __Jetpack Compose Navigation__
     - Single activity, nothing fragments
 1. __Coil__
     - An image loading library for Android backed by Kotlin Coroutines.
