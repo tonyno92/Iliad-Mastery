@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_filter_country_ordering_asc">a -> z</string>
+    <string name="dialog_filter_country_ordering_desc">z -> a</string>
+    <string name="dialog_filter_continent">Continent</string>
+    <string name="dialog_filter_language">Language</string>
+    <string name="dialog_filter_none">None</string>
+</resources>

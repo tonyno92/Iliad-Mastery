@@ -1,0 +1,26 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "RestCountry"
+
+include ":app"
+
+include ':constants'
+
+include ':components'
+
+include ":core"
+
+include ':RestCountry'
+include ':RestCountry:RestCountry-datasource'
+include ':RestCountry:RestCountry-datasource-test'
+include ':RestCountry:RestCountry-domain'
+include ':RestCountry:RestCountry-interactors'
+include ':RestCountry:ui-countryDetail'
+include ':RestCountry:ui-countryList'
+
+

@@ -1,0 +1,56 @@
+import com.iliadmastery.country_domain.CountryAssignedStatusEnum;
+
+CREATE TABLE country_Entity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    continents TEXT NOT NULL,
+    languages TEXT NOT NULL,
+    flag TEXT NOT NULL,
+    coatOfArms TEXT,
+    area REAL AS Float NOT NULL,
+    population INTEGER AS Int NOT NULL,
+    unmember INTEGER AS Boolean NOT NULL,
+    status TEXT AS CountryAssignedStatusEnum NOT NULL
+);
+
+selectAll:
+SELECT *
+FROM country_Entity;
+
+insertCountry:
+INSERT OR REPLACE
+INTO country_Entity (
+    id,
+    name,
+    continents,
+    languages,
+    flag,
+    coatOfArms,
+    area,
+    population,
+    unmember,
+    status
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+searchCountryByName:
+SELECT * FROM country_Entity
+WHERE name LIKE ('%' || :query || '%');
+
+searchCountryByContinent:
+SELECT * FROM country_Entity
+WHERE continents LIKE :continent;
+
+searchCountryByLanguage:
+SELECT * FROM country_Entity
+WHERE languages LIKE :language;
+
+getCountry:
+SELECT * FROM country_Entity
+WHERE id = :id;
+
+removeCountry:
+DELETE FROM country_Entity
+WHERE id = :id;
+
+
+

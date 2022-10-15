@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="country_detail_yes">Yes</string>
+    <string name="country_detail_no">No</string>
+    <string name="country_detail_stats">Continent: </string>
+    <string name="country_detail_continents">Continent: </string>
+    <string name="country_detail_languages">Languages: </string>
+    <string name="country_detail_area">Area</string>
+    <string name="country_detail_population">Population</string>
+    <string name="country_detail_member">Unmember</string>
+    <string name="country_detail_assigned_status">Assigned Status</string>
+    <string name="country_detail_add_more">Add more stats here…</string>
+</resources>
