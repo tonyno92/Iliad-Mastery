@@ -13,43 +13,40 @@ the information of all the countries in the world (Restcountry.com)
 
 ## Technology stack
 
-### Modular Application 
-A project with multiple Gradle modules is known as a multi-module project.
-Modularization is a practice of organizing a codebase into loosely coupled and self contained parts.
-Each part is a module. Each module is independent and serves a clear purpose.
+### Modular Application
+
+A project with multiple Gradle modules is known as a multi-module project. Modularization is a
+practice of organizing a codebase into loosely coupled and self contained parts. Each part is a
+module. Each module is independent and serves a clear purpose.
 
 1. android application (app module)
 1. android-library-build.gradle
-   - Android module that contains ui components.
+    - Android module that contains ui components.
 1. library-build.gradle
-   - Pure kotlin library.
+    - Pure kotlin library.
 
 ### Shared Components
+
 1. Ktor (Network Client)
 1. SQL Delight (Caching Client)
 
 ### Android Specific Components
+
 1. Jetpack Compose
 1. Jetpack Compose Navigation
-   - Single activity, nothing fragments
-1. Coil :
-   - An image loading library for Android backed by Kotlin Coroutines.
-1. Accompanist
-   - A library which provides Compose Animation support for Jetpack Navigation Compose
-1. Hilt
-   - A library for Dependency injection
-1. ViewModel
-   - I decided to use ViewModel from Android Architecture because it gives so much state management stuff for free.
-1. Coroutine + Flow
-   - Management of asynchronous Task\Use-case
-1. Light&Dark Mode
-
-## Todo Improvement!!
-Since in the app we have only one API call, one business model (Country) and only one model in the data layer (CountryDto)and that such demo has only one illustrative purpose,
-I avoided using a repository between the domain level and the data level.
-
-If there were some upgrades it would have been better to add an Interfacia Repository in the domain so that it could be used by a use-case\interactor
-
+    - Single activity, nothing fragments
+1. __Coil__
+    - An image loading library for Android backed by Kotlin Coroutines.
+1. __Accompanist__
+    - A library which provides Compose Animation support for Jetpack Navigation Compose
+1. __Hilt__
+    - A library for Dependency injection
+1. __ViewModel__
+    - I decided to use ViewModel from Android Architecture because it gives so much state management
+      stuff for free.
+1. __Coroutine + Flow__
+    - Management of asynchronous Task\Use-case
+1. __Light&Dark Mode__
 
 # Module Design
 
@@ -98,29 +95,37 @@ All screen tested in isolation mode.
 1. [CountryDetailTest.kt](app/src/androidTest/java/com/iliadmastery/demo/ui/countryDetail/CountryDetailTest.kt)
 1. [CountryListTest.kt](app/src/androidTest/java/com/iliadmastery/demo/ui/countryList/CountryListTest.kt)
 
-
 ### Screenshot Tests - Compose UI
-End to End UI tests with screenshots check.
-All test was ran on device with this specs
+
+End to End UI tests with screenshots check. All test was ran on device with this specs
 
 | Device name |   Android Version   | Resolution | Dp        |
 |:------------|:-------------------:|------------|-----------|
 | Nexus S     | Android 11 (API 30) | 1080x1920  | 412 x 732 |
 
-
 [Screenshot Root Directory](app/src/androidTest/assets)
 
 1. [CountryListEndToEnd.kt](app/src/androidTest/java/com/iliadmastery/demo/ui/endToEnd/CountryListEndToEnd.kt)
-
 
 # API
 
 https://restcountries.com
 
-### RestCountry All
+### All Countries
 
 GET https://restcountries.com/v3.1/all
 
 # Author
 
-[Antonio Passaro](mailto:tonyno92@gmail.com) - Android Engineer
+[Antonio Passaro - Android Engineer](mailto:tonyno92@gmail.com)
+
+---
+
+## Todo Improvement!!
+
+Since in the app we have only one API call, one business model (Country) and only one model in the
+data layer (CountryDto)and that such demo has only one illustrative purpose, I avoided using a
+repository between the domain level and the data level.
+
+If there were some upgrades it would have been better to add an Interfacia Repository in the domain
+so that it could be used by a use-case\interactor
