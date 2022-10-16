@@ -30,6 +30,11 @@ class GetCountries(
         try {
             emit(DataState.Loading(progressBarState = ProgressBarState.Loading))
 
+            // Uncomment here if you first want to output values in cache
+            cache.selectAll().takeIf { it.isNotEmpty() }?.also { cachedCountries ->
+                emit(DataState.Data(cachedCountries))
+            }
+
             val countries: List<Country> = try { // catch network exceptions
                 service.getAllCountries()
             }catch (e: Exception){

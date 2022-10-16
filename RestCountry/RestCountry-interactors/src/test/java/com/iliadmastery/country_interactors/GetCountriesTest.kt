@@ -28,7 +28,7 @@ class GetCountriesTest {
 
 
     @Test
-    fun getCountries_success() = runBlocking {
+    fun getCountries_firts_start_success() = runBlocking {
 
         // setup
         val countryDatabase = CountryDatabaseFake()
@@ -63,6 +63,49 @@ class GetCountriesTest {
 
         // Confirm loading state is IDLE
         assert(emissions[2] == DataState.Loading<List<Country>>(ProgressBarState.Idle))
+    }
+
+    @Test
+    fun getCountries_subsequent_start_success() = runBlocking {
+
+        // setup
+        val countryDatabase = CountryDatabaseFake()
+        val countryCache = CountryCacheFake(countryDatabase)
+        val countryService = CountryServiceFake.build(
+            type = CountryServiceResponseType.CorrectData // http 200 data ok
+        )
+
+        // Prepopulates the cache to simulate the first app run
+        countryCache.insert(serializeCountryData(CountryDataValid.data))
+
+        getCountries = GetCountries(
+            cache = countryCache,
+            service = countryService
+        )
+
+        // Confirm the cache is empty before any use-cases have been executed
+        var cachedCountries = countryCache.selectAll()
+        assert(cachedCountries.isNotEmpty())
+
+        // Execute the use-case
+        val emissions = getCountries.execute().toList()
+
+        // First emission should be loading
+        assert(emissions[0] == DataState.Loading<List<Country>>(ProgressBarState.Loading))
+
+        // Confirm second emission is data
+        assert(emissions[1] is DataState.Data)
+        assert(((emissions[1] as DataState.Data).data?.size ?: 0) == NUM_COUNTRIES)
+
+        assert(emissions[2] is DataState.Data)
+        assert(((emissions[2] as DataState.Data).data?.size ?: 0) == NUM_COUNTRIES)
+
+        // Confirm the cache is no longer empty
+        cachedCountries = countryCache.selectAll()
+        assert(cachedCountries.size == NUM_COUNTRIES)
+
+        // Confirm loading state is IDLE
+        assert(emissions[3] == DataState.Loading<List<Country>>(ProgressBarState.Idle))
     }
 
     @Test
