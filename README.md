@@ -123,9 +123,8 @@ GET https://restcountries.com/v3.1/all
 
 ## Todo Improvement!!
 
-Since in the app we have only one API call, one business model (Country) and only one model in the
-data layer (CountryDto)and that such demo has only one illustrative purpose, I avoided using a
-repository between the domain level and the data level.
-
-If there were some upgrades it would have been better to add an Interfacia Repository in the domain
-so that it could be used by a use-case\interactor
+- Since in the app we have only one API call, one business model (Country) and only one model in the
+  data layer (CountryDto)and that such demo has only one illustrative purpose, I avoided using a
+  repository between the domain level and the data level.
+  If there were some upgrades it would have been better to add an Interface Repository in the domain
+  so that it could be used by a use-case\interactor
