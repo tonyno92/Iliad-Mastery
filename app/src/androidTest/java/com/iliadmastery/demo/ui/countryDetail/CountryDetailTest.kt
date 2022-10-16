@@ -37,7 +37,7 @@ class CountryDetailTest {
             // choose a country at random
             val country = countryData[Random.nextInt(0, countryData.size - 1)]
             setContent {
-                RestCountryInfoTheme() {
+                RestCountryInfoTheme {
                     val state = remember {
                         CountryDetailState(
                             country = country,

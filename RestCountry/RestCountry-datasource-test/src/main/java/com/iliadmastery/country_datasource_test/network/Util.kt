@@ -16,6 +16,6 @@ private val json = Json {
  * @param jsonData
  * @return List[Country]
  */
-fun serializeCountryData(jsonData: String): List<Country> {
-    return json.decodeFromString<List<CountryDto>>(jsonData).map { it.toCountry() }
-}
+fun serializeCountryData(jsonData: String) =
+    json.decodeFromString<List<CountryDto>>(jsonData)
+        .map { it.toCountry() }

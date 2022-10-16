@@ -36,7 +36,7 @@ class CountryListTest {
         composeTestRule.apply {
 
             setContent {
-                RestCountryInfoTheme() {
+                RestCountryInfoTheme {
                     val state = remember {
                         CountryListState(
                             countries = countryData,
