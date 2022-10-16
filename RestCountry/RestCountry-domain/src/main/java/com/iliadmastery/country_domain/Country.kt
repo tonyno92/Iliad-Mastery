@@ -15,7 +15,7 @@ package com.iliadmastery.country_domain
  * @property status
  */
 data class Country(
-    val id: Long,
+    val id: Int,
     val name: String,
     val continents: List<String>,
     val flag: String,

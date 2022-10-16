@@ -1,7 +1,7 @@
 import com.iliadmastery.country_domain.CountryAssignedStatusEnum;
 
 CREATE TABLE country_Entity (
-    id INTEGER NOT NULL PRIMARY KEY,
+    id INTEGER AS Int NOT NULL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     continents TEXT NOT NULL,
     languages TEXT NOT NULL,

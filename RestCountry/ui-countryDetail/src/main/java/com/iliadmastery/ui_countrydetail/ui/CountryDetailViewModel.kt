@@ -28,7 +28,7 @@ constructor(
     val state: MutableState<CountryDetailState> = mutableStateOf(CountryDetailState())
 
     init {
-        savedStateHandle.get<Long>("countryId")?.let { countryId ->
+        savedStateHandle.get<Int>("countryId")?.let { countryId ->
             onTriggerEvent(CountryDetailEvents.GetCountryFromCache(countryId))
         }?: showError(
             uiComponent = UIComponent.Dialog(
@@ -70,7 +70,7 @@ constructor(
         )
     }
 
-    private fun getCountryFromCache(id: Long){
+    private fun getCountryFromCache(id: Int){
         getCountryFromCache.execute(id).onEach { dataState ->
             when(dataState){
                 is DataState.Loading -> {

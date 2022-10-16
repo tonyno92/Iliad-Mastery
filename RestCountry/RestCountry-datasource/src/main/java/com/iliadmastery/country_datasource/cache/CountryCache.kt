@@ -18,14 +18,14 @@ interface CountryCache {
      * @param id
      * @return [Country]?
      */
-    suspend fun getCountry(id: Long): Country?
+    suspend fun getCountry(id: Int): Country?
 
     /**
      * remove country from cache by primary key
      *
      * @param id
      */
-    suspend fun removeCountry(id: Long)
+    suspend fun removeCountry(id: Int)
 
     /**
      * select all countries from cache

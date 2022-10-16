@@ -9,7 +9,7 @@ import com.iliadmastery.core.domain.UIComponent
 sealed class CountryDetailEvents{
 
     data class GetCountryFromCache(
-        val id: Long,
+        val id: Int,
     ): CountryDetailEvents()
 
     object OnRemoveHeadFromQueue: CountryDetailEvents()
