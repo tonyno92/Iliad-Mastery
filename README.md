@@ -121,7 +121,7 @@ GET https://restcountries.com/v3.1/all
 
 ---
 
-## Todo Improvement!!
+## Applicable improvements
 
 - Since in the app we have only one API call, one business model (Country) and only one model in the
   data layer (CountryDto)and that such demo has only one illustrative purpose, I avoided using a
