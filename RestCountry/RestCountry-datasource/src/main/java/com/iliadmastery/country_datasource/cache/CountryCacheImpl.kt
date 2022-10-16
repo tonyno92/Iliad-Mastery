@@ -27,7 +27,7 @@ class CountryCacheImpl(
     override suspend fun insert(country: Country) {
         return country.run {
             queries.insertCountry(
-                null,
+                id = id,
                 name = name,
                 /**
                  * Here it would have been possible to manage with an adapter as for [CountryAssignedStatusEnum]

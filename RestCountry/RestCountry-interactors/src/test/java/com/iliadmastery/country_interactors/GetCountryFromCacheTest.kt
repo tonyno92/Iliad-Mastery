@@ -36,7 +36,7 @@ class GetCountryFromCacheTest {
 
         getCountryFromCache = GetCountryFromCache(countryCache)
 
-        countryData = serializeCountryData(CountryDataValid.data).simulateIdAutoIncrement()
+        countryData = serializeCountryData(CountryDataValid.data)
     }
 
     @Test
