@@ -78,7 +78,7 @@ data class CoatOfArmsDto(
  */
 fun CountryDto.toCountry(): Country {
     return Country(
-        id = -1,
+        id = name.official.hashCode().toLong(),
         name = name.official,
         continents = continents,
         flag = flags.png,
