@@ -34,7 +34,7 @@ import com.iliadmastery.ui_countrylist.components.CountryListToolbar
 fun CountryList(
     state: CountryListState,
     events: (CountryListEvents) -> Unit,
-    navigateToDetailScreen: (Long) -> Unit,
+    navigateToDetailScreen: (Int) -> Unit,
     imageLoader: ImageLoader,
 ) {
     DefaultScreenUI(

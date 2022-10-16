@@ -17,7 +17,7 @@ sealed class Screen(val route: String, val arguments: List<NamedNavArgument>){
     object CountryDetail: Screen(
         route = "countryDetail",
         arguments = listOf(navArgument("countryId") {
-            type = NavType.LongType
+            type = NavType.IntType
         })
     )
 

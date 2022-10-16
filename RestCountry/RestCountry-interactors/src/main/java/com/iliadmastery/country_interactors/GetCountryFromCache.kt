@@ -17,7 +17,7 @@ class GetCountryFromCache(
 ) {
 
     fun execute(
-        id: Long,
+        id: Int,
     ): Flow<DataState<Country>> = flow {
         try {
             emit(DataState.Loading(progressBarState = ProgressBarState.Loading))

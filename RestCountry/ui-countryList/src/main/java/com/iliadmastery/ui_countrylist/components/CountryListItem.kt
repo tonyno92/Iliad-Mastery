@@ -34,7 +34,7 @@ import com.iliadmastery.ui_countrylist.R
 @Composable
 fun CountryListItem(
     country: Country,
-    onSelectCountry: (Long) -> Unit,
+    onSelectCountry: (Int) -> Unit,
     imageLoader: ImageLoader,
 ) {
     Surface(

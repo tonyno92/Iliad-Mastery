@@ -15,14 +15,14 @@ class CountryCacheFake(
     /**
      * @see [CountryCache]
      */
-    override suspend fun getCountry(id: Long) =
+    override suspend fun getCountry(id: Int) =
         db.countries.find { it.id == id }
 
     /**
      * @see [CountryCache]
      */
-    override suspend fun removeCountry(id: Long) {
-        db.countries.remove(db.countries.find { it.id == id })
+    override suspend fun removeCountry(id: Int) {
+        db.countries.apply { remove(find { it.id == id }) }
     }
 
     /**
@@ -35,21 +35,23 @@ class CountryCacheFake(
      * @see [CountryCache]
      */
     override suspend fun insert(country: Country) {
-        if (db.countries.isNotEmpty()) {
-            var didInsert = false
-            for (cnt in db.countries) {
-                if (cnt.id == country.id) {
-                    db.countries.remove(cnt)
-                    db.countries.add(country)
-                    didInsert = true
-                    break
+        db.countries.apply {
+            if (isNotEmpty()) {
+                var didInsert = false
+                for (cnt in this) {
+                    if (cnt.id == country.id) {
+                        remove(cnt)
+                        add(country)
+                        didInsert = true
+                        break
+                    }
                 }
+                if (!didInsert) {
+                    add(country)
+                }
+            } else {
+                add(country)
             }
-            if (!didInsert) {
-                db.countries.add(country)
-            }
-        } else {
-            db.countries.add(country)
         }
     }
 
@@ -57,15 +59,17 @@ class CountryCacheFake(
      * @see [CountryCache]
      */
     override suspend fun insert(countries: List<Country>) {
-        if (db.countries.isNotEmpty()) {
-            for (country in countries) {
-                if (db.countries.contains(country)) {
-                    db.countries.remove(country)
-                    db.countries.add(country)
+        db.countries.apply {
+            if (isNotEmpty()) {
+                for (country in countries) {
+                    if (contains(country)) {
+                        remove(country)
+                        add(country)
+                    }
                 }
+            } else {
+                addAll(countries)
             }
-        } else {
-            db.countries.addAll(countries)
         }
     }
 

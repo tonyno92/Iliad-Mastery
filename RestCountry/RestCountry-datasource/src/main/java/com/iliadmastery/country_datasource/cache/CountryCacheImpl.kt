@@ -12,11 +12,11 @@ class CountryCacheImpl(
 
     private var queries: CountryDbQueries = countryDatabase.countryDbQueries
 
-    override suspend fun getCountry(id: Long): Country {
+    override suspend fun getCountry(id: Int): Country {
         return queries.getCountry(id).executeAsOne().toCountry()
     }
 
-    override suspend fun removeCountry(id: Long) {
+    override suspend fun removeCountry(id: Int) {
         queries.removeCountry(id)
     }
 
