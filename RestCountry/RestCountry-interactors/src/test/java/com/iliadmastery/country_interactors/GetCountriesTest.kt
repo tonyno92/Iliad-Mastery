@@ -65,7 +65,6 @@ class GetCountriesTest {
         assert(emissions[2] == DataState.Loading<List<Country>>(ProgressBarState.Idle))
     }
 
-
     @Test
     fun getCountries_emptyList() = runBlocking {
         // setup
