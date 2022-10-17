@@ -50,7 +50,7 @@ fun CountryDetail(
     ) {
         Column {
             TopAppBar(
-                title = { Text(text = state.country?.name?:"") },
+                title = { state.country?.also { Text(text = it.name, maxLines = 1) } },
                 navigationIcon = {
                     Icon(
                         modifier = Modifier
@@ -61,7 +61,7 @@ fun CountryDetail(
                     )
                 }
             )
-            state.country?.let { country ->
+            state.country?.also { country ->
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -71,15 +71,16 @@ fun CountryDetail(
                                 .fillMaxSize()
                                 .background(MaterialTheme.colors.background)
                         ) {
-                            val painter = rememberImagePainter(country.flag,
-                                imageLoader = imageLoader,
+                            val painter = rememberImagePainter(
+                                data = country.flag,
+                                //imageLoader = imageLoader,
                                 builder = {
                                     placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
                                 })
                             Image(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .defaultMinSize(minHeight = 200.dp),
+                                    .height(300.dp),
                                 painter = painter,
                                 contentDescription = country.name,
                                 contentScale = ContentScale.Crop,
