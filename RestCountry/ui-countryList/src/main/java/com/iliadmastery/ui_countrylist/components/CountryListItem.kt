@@ -14,10 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
 import com.iliadmastery.country_domain.Country
 import com.iliadmastery.ui_countrylist.ui.test.TAG_COUNTRY_NAME
 import com.iliadmastery.ui_countrylist.ui.test.TAG_COUNTRY_CONTINENTS
@@ -52,12 +53,11 @@ fun CountryListItem(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val painter = rememberImagePainter(
-                country.flag,
-                //imageLoader = imageLoader,
-                builder = {
-                    placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
-                }
+            /*val painter = rememberAsyncImagePainter(
+                model = country.flag,
+                imageLoader = imageLoader,
+                placeholder = painterResource(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background),
+                contentScale = ContentScale.FillBounds
             )
             Image(
                 modifier = Modifier
@@ -65,7 +65,22 @@ fun CountryListItem(
                     .height(70.dp),
                 painter = painter,
                 contentDescription = country.name,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.FillBounds,
+            )*/
+            /**
+             * Recommended use!!
+             * This is the first way to load a background image
+             * The second way is using a painter, but it doesn't recommended.
+             */
+            AsyncImage(
+                modifier = Modifier
+                    .width(120.dp)
+                    .height(70.dp),
+                model = country.flag,
+                contentDescription = "Country Flag",
+                imageLoader = imageLoader,
+                placeholder = painterResource(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background),
+                contentScale = ContentScale.FillBounds
             )
             Column(
                 modifier = Modifier

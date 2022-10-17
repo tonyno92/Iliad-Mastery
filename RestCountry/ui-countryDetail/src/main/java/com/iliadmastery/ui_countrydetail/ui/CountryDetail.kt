@@ -16,15 +16,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
 import com.iliadmastery.components.DefaultScreenUI
 import com.iliadmastery.country_domain.Country
 import com.iliadmastery.country_domain.CountryAssignedStatusEnum
 import com.iliadmastery.ui_countrydetail.R
+import com.iliadmastery.ui_countrydetail.ui.test.TAG_COUNTRY_NAME
 
 /**
  * Composable function that make a [com.iliadmastery.demo.ui.navigation.Screen.CountryDetail]
@@ -71,19 +74,21 @@ fun CountryDetail(
                                 .fillMaxSize()
                                 .background(MaterialTheme.colors.background)
                         ) {
-                            val painter = rememberImagePainter(
-                                data = country.flag,
-                                //imageLoader = imageLoader,
-                                builder = {
-                                    placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
-                                })
-                            Image(
+                            // Uncomment here if you want use a painter the not raccomandaThis is the first way to load a background image
+                            /*CoilImageWithPainter(
+                                model = country.flag,
+                                imageLoader = imageLoader,
+                                contentDescription = country.name
+                            )*/
+                            AsyncImage(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(300.dp),
-                                painter = painter,
-                                contentDescription = country.name,
-                                contentScale = ContentScale.Crop,
+                                    .height(190.dp),
+                                model = country.flag,
+                                contentDescription = "country.name",
+                                imageLoader = imageLoader,
+                                placeholder = painterResource(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background),
+                                contentScale = ContentScale.FillWidth
                             )
                             Column(
                                 modifier = Modifier
@@ -101,11 +106,12 @@ fun CountryDetail(
                                         modifier = Modifier
                                             .weight(weight = .8f, fill = true)
                                             .align(Alignment.CenterVertically)
-                                            .padding(end = 8.dp),
+                                            .padding(end = 8.dp)
+                                            .testTag(TAG_COUNTRY_NAME),
                                         text = country.name,
                                         style = MaterialTheme.typography.h1,
                                     )
-                                    val iconPainter = rememberImagePainter(country.coatOfArms,
+                                    /*val iconPainter = rememberImagePainter(country.coatOfArms,
                                         imageLoader = imageLoader,
                                         builder = {
                                             placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
@@ -118,6 +124,15 @@ fun CountryDetail(
                                             .align(Alignment.CenterVertically),
                                         painter = iconPainter,
                                         contentDescription = country.name,
+                                        contentScale = ContentScale.Fit,
+                                    )*/
+                                    AsyncImage(
+                                        modifier = Modifier
+                                            .weight(weight = .2f, fill = false)
+                                            .height(60.dp),
+                                        model = country.coatOfArms,
+                                        imageLoader = imageLoader,
+                                        contentDescription = "country.name",
                                         contentScale = ContentScale.Fit,
                                     )
                                 }
@@ -141,6 +156,40 @@ fun CountryDetail(
             }
         }
     }
+}
+
+/**
+ * Not recommended!!!
+ *
+ * Internally, AsyncImage use a AsyncImagePainter to load the model.
+ * If you need a Painter and can't use AsyncImage, you can load the image using rememberAsyncImagePainter
+ * rememberAsyncImagePainter is a lower-level API that may not behave as expected in all cases.
+ * Read the method's documentation for more information.
+ *
+ * @param model
+ * @param imageLoader
+ * @param contentDescription
+ */
+@Composable
+fun CoilImageWithPainter(
+    model: Any,
+    imageLoader: ImageLoader,
+    contentDescription: String
+) {
+    /*val painter = rememberAsyncImagePainter(
+        model = model,
+        imageLoader = imageLoader,
+        placeholder = painterResource(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background),
+        contentScale = ContentScale.Crop
+    )
+    Image(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp),
+        painter = painter,
+        contentDescription = contentDescription,
+        contentScale = ContentScale.Crop,
+    )*/
 }
 
 
