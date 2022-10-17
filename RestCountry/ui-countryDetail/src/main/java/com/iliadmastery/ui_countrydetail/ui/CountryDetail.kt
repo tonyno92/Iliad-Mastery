@@ -3,12 +3,13 @@ package com.iliadmastery.ui_countrydetail.ui
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -38,6 +39,7 @@ fun CountryDetail(
     state: CountryDetailState,
     events: (CountryDetailEvents) -> Unit,
     imageLoader: ImageLoader,
+    onBackNavigation: () -> Unit,
 ) {
     DefaultScreenUI(
         queue = state.errorQueue,
@@ -46,78 +48,92 @@ fun CountryDetail(
         },
         progressBarState = state.progressBarState,
     ) {
-        state.country?.let { country ->
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                item {
-                    Column(
+        Column {
+            TopAppBar(
+                title = { Text(text = state.country?.name?:"") },
+                navigationIcon = {
+                    Icon(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colors.background)
-                    ) {
-                        val painter = rememberImagePainter(country.flag,
-                            imageLoader = imageLoader,
-                            builder = {
-                                placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
-                            })
-                        Image(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .defaultMinSize(minHeight = 200.dp),
-                            painter = painter,
-                            contentDescription = country.name,
-                            contentScale = ContentScale.Crop,
-                        )
+                            .padding(8.dp)
+                            .clickable { onBackNavigation() },
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                    )
+                }
+            )
+            state.country?.let { country ->
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    item {
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(12.dp)
+                                .background(MaterialTheme.colors.background)
                         ) {
-                            Row(
+                            val painter = rememberImagePainter(country.flag,
+                                imageLoader = imageLoader,
+                                builder = {
+                                    placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
+                                })
+                            Image(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(bottom = 8.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
+                                    .defaultMinSize(minHeight = 200.dp),
+                                painter = painter,
+                                contentDescription = country.name,
+                                contentScale = ContentScale.Crop,
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(12.dp)
                             ) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(bottom = 8.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text(
+                                        modifier = Modifier
+                                            .weight(weight = .8f, fill = true)
+                                            .align(Alignment.CenterVertically)
+                                            .padding(end = 8.dp),
+                                        text = country.name,
+                                        style = MaterialTheme.typography.h1,
+                                    )
+                                    val iconPainter = rememberImagePainter(country.coatOfArms,
+                                        imageLoader = imageLoader,
+                                        builder = {
+                                            placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
+                                        })
+                                    Image(
+                                        modifier = Modifier
+                                            .weight(weight = .2f, fill = false)
+                                            .height(60.dp)
+                                            //.width(30.dp)
+                                            .align(Alignment.CenterVertically),
+                                        painter = iconPainter,
+                                        contentDescription = country.name,
+                                        contentScale = ContentScale.Fit,
+                                    )
+                                }
                                 Text(
-                                    modifier = Modifier
-                                        .weight(weight = .8f, fill = true)
-                                        .align(Alignment.CenterVertically)
-                                        .padding(end = 8.dp),
-                                    text = country.name,
-                                    style = MaterialTheme.typography.h1,
+                                    modifier = Modifier.padding(bottom = 4.dp),
+                                    text = stringResource(id = R.string.country_detail_continents) + country.continents.joinToString(),
+                                    style = MaterialTheme.typography.subtitle1,
                                 )
-                                val iconPainter = rememberImagePainter(country.coatOfArms,
-                                    imageLoader = imageLoader,
-                                    builder = {
-                                        placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
-                                    })
-                                Image(
-                                    modifier = Modifier
-                                        .weight(weight = .2f, fill = false)
-                                        .height(60.dp)
-                                        //.width(30.dp)
-                                        .align(Alignment.CenterVertically),
-                                    painter = iconPainter,
-                                    contentDescription = country.name,
-                                    contentScale = ContentScale.Fit,
+                                Text(
+                                    modifier = Modifier.padding(bottom = 12.dp),
+                                    text = stringResource(id = R.string.country_detail_languages) + country.languages.joinToString(),
+                                    style = MaterialTheme.typography.caption,
                                 )
+                                CountryStatisticalStats(country = country, padding = 10.dp)
+                                Spacer(modifier = Modifier.height(12.dp))
+                                CountryStats(country = country)
                             }
-                            Text(
-                                modifier = Modifier.padding(bottom = 4.dp),
-                                text = stringResource(id = R.string.country_detail_continents) + country.continents.joinToString(),
-                                style = MaterialTheme.typography.subtitle1,
-                            )
-                            Text(
-                                modifier = Modifier.padding(bottom = 12.dp),
-                                text = stringResource(id = R.string.country_detail_languages) + country.languages.joinToString(),
-                                style = MaterialTheme.typography.caption,
-                            )
-                            CountryStatisticalStats(country = country, padding = 10.dp)
-                            Spacer(modifier = Modifier.height(12.dp))
-                            CountryStats(country = country)
                         }
                     }
                 }

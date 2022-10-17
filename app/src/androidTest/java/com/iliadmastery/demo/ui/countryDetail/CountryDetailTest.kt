@@ -47,6 +47,7 @@ class CountryDetailTest {
                         state = state,
                         events = {},
                         imageLoader = imageLoader,
+                        onBackNavigation = {}
                     )
                 }
             }

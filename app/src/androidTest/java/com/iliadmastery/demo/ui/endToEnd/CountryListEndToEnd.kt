@@ -138,7 +138,8 @@ class CountryListEndToEnd {
                             CountryDetail(
                                 state = viewModel.state.value,
                                 events = viewModel::onTriggerEvent,
-                                imageLoader = imageLoader
+                                imageLoader = imageLoader,
+                                onBackNavigation = {}
                             )
                         }
                     }
