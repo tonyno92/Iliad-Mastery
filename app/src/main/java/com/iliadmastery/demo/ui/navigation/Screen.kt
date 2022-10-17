@@ -1,8 +1,8 @@
 package com.iliadmastery.demo.ui.navigation
 
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
-import androidx.navigation.compose.NamedNavArgument
-import androidx.navigation.compose.navArgument
+import androidx.navigation.navArgument
 
 /**
  * Navigable screens from the navigator component

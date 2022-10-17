@@ -71,7 +71,7 @@ fun NavGraphBuilder.addCountryList(
 ) {
     composable(
         route = Screen.CountryList.route,
-        exitTransition = { _, _ ->
+        exitTransition = {
             slideOutHorizontally(
                 targetOffsetX = { -width },
                 animationSpec = tween(
@@ -80,7 +80,7 @@ fun NavGraphBuilder.addCountryList(
                 )
             ) + fadeOut(animationSpec = tween(300))
         },
-        popEnterTransition = { _, _ ->
+        popEnterTransition = {
             slideInHorizontally(
                 initialOffsetX = { -width },
                 animationSpec = tween(
@@ -111,7 +111,7 @@ fun NavGraphBuilder.addCountryDetail(
     composable(
         route = Screen.CountryDetail.route + "/{countryId}",
         arguments = Screen.CountryDetail.arguments,
-        enterTransition = { _, _ ->
+        enterTransition = {
             slideInHorizontally(
                 initialOffsetX = { width },
                 animationSpec = tween(
@@ -120,7 +120,7 @@ fun NavGraphBuilder.addCountryDetail(
                 )
             ) + fadeIn(animationSpec = tween(300))
         },
-        popExitTransition = { _, _ ->
+        popExitTransition = {
             slideOutHorizontally(
                 targetOffsetX = { width },
                 animationSpec = tween(

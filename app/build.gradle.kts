@@ -33,10 +33,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.composeVersion
+        kotlinCompilerExtensionVersion = Compose.composeCompilerVersion
     }
     packagingOptions {
         exclude("META-INF/AL2.0")
@@ -44,7 +43,7 @@ android {
     }
 }
 
-dependencies{
+dependencies {
 
     implementation(project(Modules.core))
     implementation(project(Modules.restCountryDataSource))
