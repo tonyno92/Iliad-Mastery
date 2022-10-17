@@ -11,6 +11,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import coil.ImageLoader
 import com.iliadmastery.demo.ui.navigation.Screen
 import com.iliadmastery.demo.ui.theme.RestCountryInfoTheme
@@ -49,6 +50,7 @@ class MainActivity : ComponentActivity() {
                                 width = constraints.maxWidth / 2,
                             )
                             addCountryDetail(
+                                navController = navController,
                                 imageLoader = imageLoader,
                                 width = constraints.maxWidth / 2
                             )
@@ -102,6 +104,7 @@ fun NavGraphBuilder.addCountryList(
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addCountryDetail(
+    navController: NavHostController,
     imageLoader: ImageLoader,
     width: Int,
 ) {
@@ -131,6 +134,7 @@ fun NavGraphBuilder.addCountryDetail(
         CountryDetail(
             state = viewModel.state.value,
             events = viewModel::onTriggerEvent,
+            onBackNavigation = { navController.navigateUp() },
             imageLoader = imageLoader
         )
     }
