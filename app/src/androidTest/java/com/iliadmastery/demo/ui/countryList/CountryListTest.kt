@@ -53,9 +53,8 @@ class CountryListTest {
             }
 
             onRoot(useUnmergedTree = true).printToLog("TAG")
-            //composeTestRule.onNode(SemanticsMatcher.expectValue(SemanticsProperties.ContentDescription, listOf("Kingdom of Spain"))).assertIsDisplayed()
 
-            onNodeWithContentDescription("Iceland").assertIsDisplayed()
+
             onNodeWithText("Iceland").assertIsDisplayed()
             onNodeWithText("Kingdom of Spain").assertIsDisplayed()
             onNodeWithText("Republic of Iraq").assertIsDisplayed()

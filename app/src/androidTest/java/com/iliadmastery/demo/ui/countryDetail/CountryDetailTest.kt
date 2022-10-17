@@ -2,9 +2,8 @@ package com.iliadmastery.demo.ui.countryDetail
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.remember
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
 import androidx.test.platform.app.InstrumentationRegistry
 import coil.ImageLoader
 import com.iliadmastery.country_datasource_test.network.data.CountryDataValid
@@ -14,6 +13,7 @@ import com.iliadmastery.country_datasource_test.network.serializeCountryData
 import com.iliadmastery.ui_countrydetail.ui.CountryDetail
 import com.iliadmastery.ui_countrydetail.ui.CountryDetailState
 import com.iliadmastery.ui_countrydetail.R
+import com.iliadmastery.ui_countrydetail.ui.test.TAG_COUNTRY_NAME
 import org.junit.Rule
 import org.junit.Test
 import kotlin.random.Random
@@ -51,7 +51,9 @@ class CountryDetailTest {
                     )
                 }
             }
-            onNodeWithText(country.name).assertIsDisplayed()
+            onNodeWithTag(TAG_COUNTRY_NAME)
+                .assertTextEquals(country.name)
+                .assertIsDisplayed()
 
             val continents =
                 context.getString(R.string.country_detail_continents) + country.continents.joinToString()
