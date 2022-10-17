@@ -54,7 +54,7 @@ fun CountryListItem(
         ) {
             val painter = rememberImagePainter(
                 country.flag,
-                imageLoader = imageLoader,
+                //imageLoader = imageLoader,
                 builder = {
                     placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
                 }
