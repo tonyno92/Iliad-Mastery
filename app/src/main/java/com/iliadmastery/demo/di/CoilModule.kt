@@ -2,6 +2,7 @@ package com.iliadmastery.demo.di
 
 import android.app.Application
 import coil.ImageLoader
+import coil.memory.MemoryCache
 import com.iliadmastery.demo.R
 import dagger.Module
 import dagger.Provides
@@ -19,11 +20,13 @@ object CoilModule {
      */
     @Provides
     @Singleton
-    fun provideImageLoader(app: Application): ImageLoader{
+    fun provideImageLoader(app: Application): ImageLoader {
         return ImageLoader.Builder(app)
             .error(R.drawable.error_image)
             .placeholder(R.drawable.white_background)
-            .availableMemoryPercentage(0.25) // Don't know what is recommended?
+            .memoryCache {
+                MemoryCache.Builder(app).maxSizePercent(0.25).build()
+            }
             .crossfade(true)
             .build()
     }
