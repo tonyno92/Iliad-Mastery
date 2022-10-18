@@ -160,6 +160,9 @@ class CountryListEndToEnd {
         val testName = "testSearchCountryByName"
 
         composeTestRule.apply {
+            onAllNodesWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
+                .onFirst()
+                .assertIsDisplayed()
             assertOnEqualScreenshot(testName, "1", onRoot())
 
             // Search by text "Vatican City State"
@@ -167,6 +170,7 @@ class CountryListEndToEnd {
             // Confirms that only countries with similar names are shown
             onNodeWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
                 .assertTextEquals("Vatican City State")
+                .assertIsDisplayed()
             assertOnEqualScreenshot(testName, "2", onRoot())
             ComposeTestFacade.clearText(this, onTag = TAG_COUNTRY_SEARCH_BAR)
 
@@ -202,6 +206,9 @@ class CountryListEndToEnd {
         val testName = "testFilterCountryAlphabetically"
 
         composeTestRule.apply {
+            onAllNodesWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
+                .onFirst()
+                .assertIsDisplayed()
             assertOnEqualScreenshot(testName, "1", onRoot())
 
             // Show the dialog
@@ -250,6 +257,9 @@ class CountryListEndToEnd {
         composeTestRule.apply {
             // Choose a random continent from those available
             ContinentFilter.Oceania.also { oceania ->
+                onAllNodesWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
+                    .onFirst()
+                    .assertIsDisplayed()
                 assertOnEqualScreenshot(testName, "1", onRoot())
 
                 // Show the dialog
@@ -277,6 +287,9 @@ class CountryListEndToEnd {
         val testName = "testFilterCountryByEachContinent"
 
         composeTestRule.apply {
+            onAllNodesWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
+                .onFirst()
+                .assertIsDisplayed()
             assertOnEqualScreenshot(testName, "1", onRoot())
 
             // Choose a random continent from those available
@@ -315,6 +328,9 @@ class CountryListEndToEnd {
         composeTestRule.apply {
 
             LanguageFilter.Language("Italian").also { language: Filter ->
+                onAllNodesWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
+                    .onFirst()
+                    .assertIsDisplayed()
                 assertOnEqualScreenshot(testName, "1", onRoot())
 
                 // Show the dialog
@@ -348,6 +364,9 @@ class CountryListEndToEnd {
         composeTestRule.apply {
 
             LanguageFilter.Language("Italian").also { language: Filter ->
+                onAllNodesWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
+                    .onFirst()
+                    .assertIsDisplayed()
                 assertOnEqualScreenshot(testName, "1", onRoot())
 
                 // Show the dialog
@@ -399,6 +418,9 @@ class CountryListEndToEnd {
         val testName = "testFilterCountryResetAll"
 
         composeTestRule.apply {
+            onAllNodesWithTag(TAG_COUNTRY_NAME, useUnmergedTree = true)
+                .onFirst()
+                .assertIsDisplayed()
             assertOnEqualScreenshot(testName, "1", onRoot())
 
             // Choose a random continent from those available

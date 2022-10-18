@@ -21,7 +21,8 @@ import java.io.FileOutputStream
 fun assertOnEqualScreenshot(
     folderName: String,
     goldenName: String,
-    node: SemanticsNodeInteraction
+    node: SemanticsNodeInteraction,
+    onlyGenerateScreenshot: Boolean = false
 ) {
     val bitmap = node.captureToImage().asAndroidBitmap()
 
@@ -32,23 +33,25 @@ fun assertOnEqualScreenshot(
         newFilename,
         bitmap
     )
-    val context = InstrumentationRegistry.getInstrumentation().context
-    val appPackageName = BuildConfig.APPLICATION_ID
-    val golden = try {
-        val goldenFilename = "$folderName/${goldenName}.png"
-        context.resources.assets.open(goldenFilename)
-            .use { BitmapFactory.decodeStream(it) }
-    } catch (e: FileNotFoundException) {
-        throw FileNotFoundException(
-            e.message + " was not found in assets\n" +
-                    "First time running this screenshot test? \n" +
-                    "Go to Device File Explorer -> data/data/$appPackageName/files/$folderName \n" +
-                    "and copy over the screenshot: " +
-                    "$newFilename to the assets/$folderName folder in androidTest \n" +
-                    "with updated name ${e.message?.removePrefix("$folderName/")}"
-        )
+    if (!onlyGenerateScreenshot) {
+        val context = InstrumentationRegistry.getInstrumentation().context
+        val appPackageName = BuildConfig.APPLICATION_ID
+        val golden = try {
+            val goldenFilename = "$folderName/${goldenName}.png"
+            context.resources.assets.open(goldenFilename)
+                .use { BitmapFactory.decodeStream(it) }
+        } catch (e: FileNotFoundException) {
+            throw FileNotFoundException(
+                e.message + " was not found in assets\n" +
+                        "First time running this screenshot test? \n" +
+                        "Go to Device File Explorer -> data/data/$appPackageName/files/$folderName \n" +
+                        "and copy over the screenshot: " +
+                        "$newFilename to the assets/$folderName folder in androidTest \n" +
+                        "with updated name ${e.message?.removePrefix("$folderName/")}"
+            )
+        }
+        golden.compare(bitmap)
     }
-    golden.compare(bitmap)
 }
 
 private fun saveScreenshot(folderName: String, filename: String, bmp: Bitmap) {
