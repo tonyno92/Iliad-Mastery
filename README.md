@@ -35,6 +35,7 @@ module. Each module is independent and serves a clear purpose.
 1. __Jetpack Compose__
 1. __Jetpack Compose Navigation__
     - Single activity, nothing fragments
+1. __Navigation Component__
 1. __Coil__
     - An image loading library for Android backed by Kotlin Coroutines.
 1. __Accompanist__
@@ -99,9 +100,9 @@ All screen tested in isolation mode.
 
 End to End UI tests with screenshots check. All test was ran on device with this specs
 
-| Device name |   Android Version   | Resolution | Dp        |
-|:------------|:-------------------:|------------|-----------|
-| Nexus S     | Android 11 (API 30) | 1080x1920  | 412 x 732 |
+| Device name |   Android Version   | Resolution | Dp        | Passed |
+|:------------|:-------------------:|------------|-----------|:------:|
+| Nexus S     | Android 11 (API 30) | 1080x1920  | 412 x 732 |   ✅    |
 
 [Screenshot Root Directory](app/src/androidTest/assets)
 
