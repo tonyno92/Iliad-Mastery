@@ -48,7 +48,7 @@ module. Each module is independent and serves a clear purpose.
 1. __Coroutine + Flow__
     - Management of asynchronous Task\Use-case
 1. __Light&Dark Mode__
-
+    - Switch to dark or light mode without restarting app
 # Module Design
 
 | Module name                                                            | Type            | Description                                                                                   |
