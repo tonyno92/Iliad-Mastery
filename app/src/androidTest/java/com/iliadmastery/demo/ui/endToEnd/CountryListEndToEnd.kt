@@ -1,5 +1,6 @@
 package com.iliadmastery.demo.ui.endToEnd
 
+import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.test.*
@@ -112,7 +113,7 @@ class CountryListEndToEnd {
 
     @Before
     fun before() {
-        composeTestRule.setContent {
+        composeTestRule.activity.setContent {
             RestCountryInfoTheme {
                 val navController = rememberNavController()
                 NavHost(navController = navController,
