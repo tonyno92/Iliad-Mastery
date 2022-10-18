@@ -53,20 +53,6 @@ fun CountryListItem(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            /*val painter = rememberAsyncImagePainter(
-                model = country.flag,
-                imageLoader = imageLoader,
-                placeholder = painterResource(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background),
-                contentScale = ContentScale.FillBounds
-            )
-            Image(
-                modifier = Modifier
-                    .width(120.dp)
-                    .height(70.dp),
-                painter = painter,
-                contentDescription = country.name,
-                contentScale = ContentScale.FillBounds,
-            )*/
             /**
              * Recommended use!!
              * This is the first way to load a background image

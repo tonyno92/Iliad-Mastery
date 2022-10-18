@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.iliadmastery.components.DefaultScreenUI
 import com.iliadmastery.country_domain.Country
 import com.iliadmastery.country_domain.CountryAssignedStatusEnum
@@ -85,7 +86,7 @@ fun CountryDetail(
                                     .fillMaxWidth()
                                     .height(190.dp),
                                 model = country.flag,
-                                contentDescription = "country.name",
+                                contentDescription = "",
                                 imageLoader = imageLoader,
                                 placeholder = painterResource(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background),
                                 contentScale = ContentScale.FillWidth
@@ -111,28 +112,13 @@ fun CountryDetail(
                                         text = country.name,
                                         style = MaterialTheme.typography.h1,
                                     )
-                                    /*val iconPainter = rememberImagePainter(country.coatOfArms,
-                                        imageLoader = imageLoader,
-                                        builder = {
-                                            placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
-                                        })
-                                    Image(
-                                        modifier = Modifier
-                                            .weight(weight = .2f, fill = false)
-                                            .height(60.dp)
-                                            //.width(30.dp)
-                                            .align(Alignment.CenterVertically),
-                                        painter = iconPainter,
-                                        contentDescription = country.name,
-                                        contentScale = ContentScale.Fit,
-                                    )*/
                                     AsyncImage(
                                         modifier = Modifier
                                             .weight(weight = .2f, fill = false)
                                             .height(60.dp),
                                         model = country.coatOfArms,
                                         imageLoader = imageLoader,
-                                        contentDescription = "country.name",
+                                        contentDescription = "",
                                         contentScale = ContentScale.Fit,
                                     )
                                 }
@@ -176,7 +162,7 @@ fun CoilImageWithPainter(
     imageLoader: ImageLoader,
     contentDescription: String
 ) {
-    /*val painter = rememberAsyncImagePainter(
+    val painter = rememberAsyncImagePainter(
         model = model,
         imageLoader = imageLoader,
         placeholder = painterResource(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background),
@@ -189,7 +175,7 @@ fun CoilImageWithPainter(
         painter = painter,
         contentDescription = contentDescription,
         contentScale = ContentScale.Crop,
-    )*/
+    )
 }
 
 
